@@ -8,29 +8,28 @@ import { WaterService } from '../../core/services/water.service';
   standalone: true,
   imports: [NgForOf, NgIf],
   templateUrl: './water.component.html',
-  styleUrl: './water.component.scss'
+  styleUrl: './water.component.scss',
 })
-export class WaterComponent implements OnInit{
-  water: Water = {ounces: 0};
+export class WaterComponent implements OnInit {
+  drinks: Water[] = [];
   totalOunces: number = 50;
 
-  constructor(private waterService:WaterService) { }
+  constructor(private waterService: WaterService) {}
 
   ngOnInit(): void {
-      this.waterService.getWater().subscribe({
-        next: (water: Water) => {
-          this.water = water
-        },
-        error: (error:any) => {
-          console.log('Error fetching water', error);
-
-        }
-      })
+    this.waterService.getWater().subscribe({
+      next: (drinks: Water[]) => {
+        // debugger
+        console.log(drinks);
+        this.drinks = drinks;
+      },
+      error: (error: any) => {
+        console.log('Error fetching water', error);
+      },
+    });
   }
 
   addWater() {
     console.log('Water added!');
-
   }
-
 }
