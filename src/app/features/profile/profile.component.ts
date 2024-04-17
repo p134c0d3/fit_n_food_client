@@ -11,15 +11,18 @@ import { ProfileService } from '../../core/services/profile.service';
   styleUrl: './profile.component.scss',
 })
 export class ProfileComponent implements OnInit{
-  userProfile: Profile = {bio: '', goals: ''};
+  userProfile: Profile[] = []
   firstName: string = 'John';
 
   constructor(private profileService: ProfileService) {}
 
   ngOnInit(): void {
       this.profileService.getProfile().subscribe({
-        next: (profile: Profile) => {
-          this.userProfile = profile
+        next: (myprofile: Profile[]) => {
+          this.userProfile = myprofile
+        },
+        error: (error:any) => {
+          console.log('Error fetching profile', error);
         }
       })
   }
