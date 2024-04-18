@@ -10,9 +10,9 @@ import { AuthenticationService } from './authentication.service';
   providedIn: 'root',
 })
 export class WorkoutService {
-  constructor(private http: HttpClient, private authService: AuthenticationService) {}
+  constructor(private http: HttpClient, ) {}
 
   getWorkouts(user_id: number): Observable<Workout[]> {
-    return this.http.get<Workout[]>(`${environment.apiURL}users/${this.authService.userData}/workouts`);
+    return this.http.get<Workout[]>(`${environment.apiURL}users/${user_id}/workouts`);
   }
 }
