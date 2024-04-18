@@ -11,7 +11,7 @@ import { environment } from '../../../environments/environment.development';
 export class WorkoutService {
   constructor(private http: HttpClient) {}
 
-  getWorkouts(): Observable<Workout[]> {
-    return this.http.get<Workout[]>(`${environment.apiURL}users/1/workouts`);
+  getWorkouts(user_id: number): Observable<Workout[]> {
+    return this.http.get<Workout[]>(`${environment.apiURL}users/${user_id}/workouts`);
   }
 }

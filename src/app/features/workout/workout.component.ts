@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Workout } from '../../shared/models/workout';
 import { NgForOf, NgIf } from '@angular/common';
 import { WorkoutService } from '../../core/services/workout.service';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-workout',
@@ -14,16 +15,19 @@ export class WorkoutComponent implements OnInit{
   workout: Workout[] = []
 
   totalBurnedCalories:number = 500;
-  constructor(private workoutService:WorkoutService) { }
+  constructor(private workoutService:WorkoutService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.workoutService.getWorkouts().subscribe({
-      next: (workouts: Workout[]) => {
-        this.workout = workouts
-      },
-      error: (error:any) => {
-        console.log('Error fetching workouts', error)
-      }
+    this.route.params.subscribe((params: Params) => {
+      const user_id: number = +params['user_id'];
+      this.workoutService.getWorkouts(user_id).subscribe({
+        next: (workouts: Workout[]) => {
+          this.workout = workouts;
+        },
+        error: (error: any) => {
+          console.log('Error fetching workouts', error);
+        },
+      })
     })
 
   }

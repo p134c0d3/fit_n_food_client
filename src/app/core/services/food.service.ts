@@ -11,7 +11,7 @@ import { Food } from '../../shared/models/food';
 export class FoodService {
   constructor(private http: HttpClient) {}
 
-  getFood(): Observable<Food[]> {
-    return this.http.get<Food[]>(`${environment.apiURL}users/2/foods`);
+  getFood(user_id: number): Observable<Food[]> {
+    return this.http.get<Food[]>(`${environment.apiURL}users/${user_id}/foods`);
   }
 }

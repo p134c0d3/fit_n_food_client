@@ -12,8 +12,8 @@ export class ProfileService {
 
   constructor(private http:HttpClient) { }
 
-  getProfile(): Observable<Profile[]> {
-    return this.http.get<Profile[]>(`${environment.apiURL}users/1/profile`).pipe(catchError((err) => {
+  getProfile(user_id:number): Observable<Profile> {
+    return this.http.get<Profile>(`${environment.apiURL}users/${user_id}/profile`).pipe(catchError((err) => {
       throw err;
     }));
   }

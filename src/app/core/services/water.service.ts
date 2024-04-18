@@ -11,9 +11,9 @@ import { environment } from '../../../environments/environment.development';
 export class WaterService {
   constructor(private http: HttpClient) {}
 
-  getWater(): Observable<Water[]> {
+  getWater(user_id: number): Observable<Water[]> {
     // debugger;
-    return this.http.get<Water[]>(`${environment.apiURL}users/2/waters`).pipe(catchError((err) => {
+    return this.http.get<Water[]>(`${environment.apiURL}users/${user_id}/waters`).pipe(catchError((err) => {
       throw err;
     }));
   }
