@@ -17,4 +17,10 @@ export class ProfileService {
       throw err;
     }));
   }
+
+  updateProfile(user_id: number, bio: FormData, goals: FormData): Observable<Profile> {
+    return this.http.put<Profile>(`${environment.apiURL}users/${user_id}/profile`, {bio, goals}).pipe(catchError((err) => {
+      throw err;
+    }));
+  }
 }
