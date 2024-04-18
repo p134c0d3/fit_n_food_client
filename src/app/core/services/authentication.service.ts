@@ -5,17 +5,21 @@ import { Router } from '@angular/router';
 // import { environment } from '../../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthenticationService {
+  userData = localStorage.getItem('token');
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) {}
 
-  login(email:string, password:string) {
-    return this.http.post<{token:string}>(`${environment.apiURL}/login`, {email, password})
+  login(email: string, password: string) {
+    return this.http.post<{ token: string }>(`${environment.apiURL}/login`, {
+      email,
+      password,
+    });
   }
 
-  setToken(token:string) {
+  setToken(token: string) {
     localStorage.setItem('token', token);
   }
 
@@ -29,7 +33,7 @@ export class AuthenticationService {
 
   logout() {
     localStorage.removeItem('token');
-    this.router.navigate(['/login']);
+    this.router.navigate(['']);
+    return false;
   }
-
 }

@@ -18,17 +18,21 @@ export class WorkoutComponent implements OnInit{
   constructor(private workoutService:WorkoutService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => {
-      const user_id: number = +params['user_id'];
-      this.workoutService.getWorkouts(user_id).subscribe({
-        next: (workouts: Workout[]) => {
-          this.workout = workouts;
-        },
-        error: (error: any) => {
-          console.log('Error fetching workouts', error);
-        },
-      })
-    })
+    
+
+
+
+    // this.route.params.subscribe((params: Params) => {
+    //   const user_id: number = +params['user_id'];
+    //   this.workoutService.getWorkouts(user_id).subscribe({
+    //     next: (workouts: Workout[]) => {
+    //       this.workout = workouts;
+    //     },
+    //     error: (error: any) => {
+    //       console.log('Error fetching workouts', error);
+    //     },
+    //   })
+    // })
 
   }
 

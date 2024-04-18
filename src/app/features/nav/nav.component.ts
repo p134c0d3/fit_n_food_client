@@ -11,11 +11,16 @@ import { AuthenticationService } from '../../core/services/authentication.servic
   styleUrl: './nav.component.scss'
 })
 export class NavComponent {
-  isLoggedIn: boolean = false;
 
 
   constructor(private authService: AuthenticationService) {
 
-    this.isLoggedIn = this.authService.isLoggedIn();
+  }
+  isLoggedIn() {
+    return this.authService.isLoggedIn();
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }
