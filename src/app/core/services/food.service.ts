@@ -11,35 +11,24 @@ import { Food } from '../../shared/models/food';
 export class FoodService {
   constructor(private http: HttpClient) {}
 
-  getFood(user_id: number): Observable<Food[]> {
-    return this.http.get<Food[]>(`${environment.apiURL}users/${user_id}/foods`);
+  getFood(): Observable<Food[]> {
+    return this.http.get<Food[]>(`${environment.apiURL}foods/user_foods`);
   }
 
-  newFood(
-    foodName: FormData,
-    calories: FormData,
-    user_id: number
-  ): Observable<Food[]> {
-    return this.http.post<Food[]>(
-      `${environment.apiURL}users/${user_id}/foods`,
-      {
-        foodName,
-        calories
-      }
-    );
+  newFood(food: Food): Observable<Food[]> {
+    return this.http.post<Food[]>(`${environment.apiURL}/foods`, food);
   }
 
   updateFood(
     food_id: number,
     foodName: FormData,
-    calories: FormData,
-    user_id: number
+    calories: FormData
   ): Observable<Food[]> {
     return this.http.put<Food[]>(
-      `${environment.apiURL}users/${user_id}/foods/${food_id}`,
+      `${environment.apiURL}foods/${food_id}`,
       {
         foodName,
-        calories
+        calories,
       }
     );
   }

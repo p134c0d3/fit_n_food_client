@@ -50,22 +50,22 @@
         ></button>
       </div>
       <div class="modal-body">
-        <form>
+        <form [formGroup]="newFoodForm" (ngSubmit)="addFood()">
           <div class="mb-3">
             <label for="workoutName" class="col-form-label">Food Name</label>
-            <input type="text" class="form-control" id="workoutName" />
+            <input type="text" class="form-control" id="foodName" formControlName="food_name"/>
           </div>
           <div class="mb-3">
             <label for="workoutSets" class="col-form-label">Calories</label>
-            <input type="text" class="form-control" id="workoutSets" />
+            <input type="text" class="form-control" id="calories" formControlName="calories" />
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              Close
+            </button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="!newFoodForm.valid">Save Food</button>
           </div>
         </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Close
-        </button>
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="addFood()">Save Food</button>
       </div>
     </div>
   </div>
