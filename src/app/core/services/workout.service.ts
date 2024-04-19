@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 // import { environment } from '../../../environments/environment';
 import { environment } from '../../../environments/environment.development';
 import { AuthenticationService } from './authentication.service';
+import { Food } from '../../shared/models/food';
 
 @Injectable({
   providedIn: 'root',
@@ -12,28 +13,12 @@ import { AuthenticationService } from './authentication.service';
 export class WorkoutService {
   constructor(private http: HttpClient) {}
 
-  getWorkouts(user_id: number): Observable<Workout[]> {
-    return this.http.get<Workout[]>(
-      `${environment.apiURL}users/${user_id}/workouts`
-    );
+  getWorkouts(): Observable<Workout[]> {
+    return this.http.get<Workout[]>(`${environment.apiURL}workouts/user_workouts`);
   }
 
-  newWorkout(
-    workoutName: FormData,
-    sets: FormData,
-    reps: FormData,
-    calories_burned: FormData,
-    user_id: number
-  ): Observable<Workout[]> {
-    return this.http.post<Workout[]>(
-      `${environment.apiURL}users/${user_id}/workouts`,
-      {
-        workoutName,
-        sets,
-        reps,
-        calories_burned,
-      }
-    );
+  newWorkout(workout: Workout): Observable<Workout[]> {
+    return this.http.post<Workout[]>(`${environment.apiURL}/workouts`, workout);
   }
 
   updateWorkout(
@@ -41,11 +26,10 @@ export class WorkoutService {
     workoutName: FormData,
     sets: FormData,
     reps: FormData,
-    calories_burned: FormData,
-    user_id: number
+    calories_burned: FormData
   ): Observable<Workout[]> {
     return this.http.put<Workout[]>(
-      `${environment.apiURL}users/${user_id}/workouts/${workout_id}`,
+      `${environment.apiURL}workouts/${workout_id}`,
       {
         workoutName,
         sets,
@@ -55,9 +39,9 @@ export class WorkoutService {
     );
   }
 
-  deleteWorkout(user_id: number, workout_id: number): Observable<Workout[]> {
+  deleteWorkout(workout_id: number): Observable<Workout[]> {
     return this.http.delete<Workout[]>(
-      `${environment.apiURL}users/${user_id}/workouts/${workout_id}`,
+      `${environment.apiURL}workouts/${workout_id}`,
       {}
     );
   }

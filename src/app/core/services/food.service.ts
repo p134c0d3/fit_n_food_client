@@ -33,10 +33,5 @@ export class FoodService {
     );
   }
 
-  deleteWorkout(user_id: number, food_id: number): Observable<Food[]> {
-    return this.http.delete<Food[]>(
-      `${environment.apiURL}users/${user_id}/foods/${food_id}`,
-      {}
-    );
-  }
+  
 }

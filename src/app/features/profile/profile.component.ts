@@ -21,18 +21,14 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => {
-      const user_id: number = +params['user_id'];
-      this.profileService.getProfile(user_id).subscribe({
+    this.setProfile();
 
-        next: (profile: Profile) => {
-          this.userProfile = profile;
-        },
-        error: (error: any) => {
-          console.log('Error fetching profile', error);
-        },
-      })
-    })
+  }
+
+  setProfile() {
+    this.profileService.getProfile().subscribe((profile) => {
+      this.userProfile = profile;
+    });
   }
 
   updateProfile() {

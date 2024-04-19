@@ -6,21 +6,29 @@ import { environment } from '../../../environments/environment.development';
 import { Profile } from '../../shared/models/profile';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProfileService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private http:HttpClient) { }
-
-  getProfile(user_id:number): Observable<Profile> {
-    return this.http.get<Profile>(`${environment.apiURL}users/${user_id}/profile`).pipe(catchError((err) => {
-      throw err;
-    }));
+  getProfile(): Observable<Profile> {
+    return this.http.get<Profile>(`${environment.apiURL}profile/profile_index`);
   }
 
-  updateProfile(user_id: number, bio: FormData, goals: FormData): Observable<Profile> {
-    return this.http.put<Profile>(`${environment.apiURL}users/${user_id}/profile`, {bio, goals}).pipe(catchError((err) => {
-      throw err;
-    }));
+  updateProfile(
+    user_id: number,
+    bio: FormData,
+    goals: FormData
+  ): Observable<Profile> {
+    return this.http
+      .put<Profile>(`${environment.apiURL}users/${user_id}/profile`, {
+        bio,
+        goals,
+      })
+      .pipe(
+        catchError((err) => {
+          throw err;
+        })
+      );
   }
 }

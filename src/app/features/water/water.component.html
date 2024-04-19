@@ -42,18 +42,18 @@
         ></button>
       </div>
       <div class="modal-body">
-        <form>
+        <form [formGroup]="newWaterForm" (ngSubmit)="addWater()" >
           <div class="mb-3">
             <label for="waterOunces" class="col-form-label">How many ounces did you drink?</label>
-            <input type="text" class="form-control" id="waterOunces" />
+            <input type="text" class="form-control" id="waterOunces" formControlName="ounces"/>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              Close
+            </button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" >Save Water</button>
           </div>
         </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Close
-        </button>
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="addWater()">Save Water</button>
       </div>
     </div>
   </div>

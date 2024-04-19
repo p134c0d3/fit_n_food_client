@@ -11,24 +11,14 @@ import { environment } from '../../../environments/environment.development';
 export class WaterService {
   constructor(private http: HttpClient) {}
 
-  getWater(user_id: number): Observable<Water[]> {
+  getWater(): Observable<Water[]> {
     // debugger;
-    return this.http.get<Water[]>(`${environment.apiURL}users/${user_id}/waters`).pipe(catchError((err) => {
-      throw err;
-    }));
+    return this.http.get<Water[]>(`${environment.apiURL}waters/user_waters`);
   }
 
 
-  newWater(
-    ounces: FormData,
-    user_id: number
-  ): Observable<Water[]> {
-    return this.http.post<Water[]>(
-      `${environment.apiURL}users/${user_id}/waters`,
-      {
-        ounces
-      }
-    );
+  newWater(water: Water): Observable<Water[]> {
+    return this.http.post<Water[]>(`${environment.apiURL}/waters`, water);
   }
 
   updateWater(
